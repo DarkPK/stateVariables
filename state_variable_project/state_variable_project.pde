@@ -5,9 +5,10 @@ PImage theTruck;
 
 int state;
 
-float truckX,truckY,rectX,rectY;
+float truckX,truckY,rectX,rectY,groundX,groundY,tX1,tX2,tX3,tY1,tY2,tY3;
 float tScale;
 float r,g,b;
+float fallSpeed,xSpeed;
 
 void setup() {
   size(900,600);
@@ -27,6 +28,23 @@ void setup() {
   r = 184;
   g = 44;
   b = 255;
+  
+  //The ground x and y
+  groundX = 0;
+  groundY = height-25;
+  
+  //the speeds
+  fallSpeed = 1;
+  xSpeed = 0;
+  constrain(xSpeed,-10,12);
+  
+  //the ramps
+  tX1 = 100;
+  tY1 = height-25;
+  tX2 = 1;
+  tY2 = random(height/2,2*height/3);
+  tX3 = 200;
+  tY3 = height-25;
 }
 
 
@@ -34,6 +52,8 @@ void draw() {
   background(0,215,255);
   drawTheTruck();
   startScreen();
+  gameStart();
+  ground();
   
 }
 
@@ -74,4 +94,42 @@ void startScreen() {
       g = 44;
     }
   }
+}
+
+
+void gameStart() {
+  //this is the actual gameplay
+  
+  if (state == 1) {
+    //this is all of the code for the background moving
+    ground();
+    if (truckY <= groundY-50) {
+      truckY += fallSpeed;
+      fallSpeed *= 1.1;
+    }
+    else {
+      fallSpeed = 1;
+    }
+  }
+  
+}
+
+void ground() {
+  //this will draw the ground
+  if (state == 1) {
+    rectMode(LEFT);
+    noStroke();
+    fill(3,255,4);
+    rect(groundX,groundY,width,height);
+  }
+  
+}
+
+void jumps() {
+  //this makes all of your jumps you have to go over
+  
+  if (state == 1) {
+    
+  }
+  
 }
