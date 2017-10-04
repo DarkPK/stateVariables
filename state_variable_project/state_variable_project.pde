@@ -3,6 +3,8 @@
 
 PImage theTruck;
 
+boolean mL,mR;
+
 int state;
 
 float truckX,truckY,rectX,rectY,groundX,groundY,tX1,tX2,tX3,tY1,tY2,tY3;
@@ -36,15 +38,19 @@ void setup() {
   //the speeds
   fallSpeed = 1;
   xSpeed = 0;
-  constrain(xSpeed,-10,12);
+  constrain(xSpeed,-14,30);
   
   //the ramps
-  tX1 = 100;
+  tX1 = 900;
   tY1 = height-25;
-  tX2 = 1;
-  tY2 = random(height/2,2*height/3);
-  tX3 = 200;
+  tX2 = 1000;
+  tY2 = 400;
+  tX3 = 1100;
   tY3 = height-25;
+  
+  //the movement
+  mL = false;
+  mR = false;
 }
 
 
@@ -54,6 +60,10 @@ void draw() {
   startScreen();
   gameStart();
   ground();
+  jumps();
+  moveJumps();
+  keyMovement();
+  println(tX3);
   
 }
 
@@ -129,7 +139,69 @@ void jumps() {
   //this makes all of your jumps you have to go over
   
   if (state == 1) {
-    
+    noStroke();
+    fill(3,255,4);
+    triangle(tX1,tY1,tX2,tY2,tX3,tY3);
   }
-  
+}
+
+void moveJumps() {
+  //this will make the jumps moves
+  if (state == 1) {
+    if (mR == true || mL == true) {
+      tX1 += xSpeed;
+      tX2 += xSpeed;
+      tX3 += xSpeed;
+      
+      if (tX3 <= 0) {
+        tX1 = 900;
+        tX2 = 1000;
+        tX3 = 1100;
+      }
+    }
+  }
+}
+
+void keyPressed() {
+  //All of they key movements
+  if (key == 'd') {
+    mR = true;
+  }
+  if (key == 'a') {
+    mL = true;
+  }
+}
+
+
+void keyReleased() {
+  //release of key movement
+  if (key == 'd') {
+    mR = false;
+  }
+  if (key == 'a') {
+    mL = false;
+  } 
+}
+
+
+void keyMovement() {
+  //what mR and mL do
+  if (mR == true) {
+    xSpeed = -1;
+    xSpeed *= 1.1;
+  }
+  else {
+    if (xSpeed < 0) {
+      xSpeed += 2;
+    }
+  }
+  if (mL == true) {
+    xSpeed = 1;
+    xSpeed *= 1.1;
+  }
+  else {
+    if (xSpeed > 0) {
+      xSpeed -= 2;
+    }
+  }
 }
