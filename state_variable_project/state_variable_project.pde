@@ -44,7 +44,7 @@ void setup() {
   tX1 = 900;
   tY1 = height-25;
   tX2 = 1000;
-  tY2 = 400;
+  tY2 = random(300,600);
   tX3 = 1100;
   tY3 = height-25;
   
@@ -63,7 +63,7 @@ void draw() {
   jumps();
   moveJumps();
   keyMovement();
-  println(tX3);
+  goOverJumps();
   
 }
 
@@ -113,13 +113,13 @@ void gameStart() {
   if (state == 1) {
     //this is all of the code for the background moving
     ground();
-    if (truckY <= groundY-50) {
-      truckY += fallSpeed;
-      fallSpeed *= 1.1;
-    }
-    else {
-      fallSpeed = 1;
-    }
+    //if (truckY <= groundY-50) {
+    //  truckY += fallSpeed;
+    //  fallSpeed *= 1.1;
+    //}
+    //else {
+    //  fallSpeed = 1;
+    //}
   }
   
 }
@@ -157,10 +157,27 @@ void moveJumps() {
         tX1 = 900;
         tX2 = 1000;
         tX3 = 1100;
+        tY2 = random(300,600);
       }
     }
   }
 }
+
+
+void goOverJumps() {
+  //this will make you go over the jumps
+  if (state == 1) {
+    if (truckX >= tX2-100) {
+      if (mR == true) {
+        truckY += xSpeed;
+      }
+      if (truckX ==) {
+        
+      }
+    }
+  }
+}
+
 
 void keyPressed() {
   //All of they key movements
