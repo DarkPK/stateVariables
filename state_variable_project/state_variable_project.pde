@@ -1,5 +1,7 @@
 //Kam Wall Comp Sci 30 P4 
-//this is a game where you drive a truck for as long as possible, untill you land upsidown or you choose to quit
+//this is a game where you drive a truck over ramps
+//it looks like an older game where the truck stays level while going over it
+//known problems the truck will either go too high or too low over the jumps
 
 PImage theTruck;
 
