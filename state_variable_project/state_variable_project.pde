@@ -21,7 +21,7 @@ void setup() {
   //everything to do with the truck
   theTruck = loadImage("truck.png");
   truckX = width/4;
-  truckY = 5*height/6;
+  truckY = height-75;
   tScale = 0.1;
   
   //theButton
@@ -64,6 +64,7 @@ void draw() {
   moveJumps();
   keyMovement();
   goOverJumps();
+  endScreen();
   
 }
 
@@ -167,17 +168,37 @@ void moveJumps() {
 void goOverJumps() {
   //this will make you go over the jumps
   if (state == 1) {
-    if (truckX >= tX2-100) {
+    if (truckX >= tX2-100 && truckX <= tX2) {
       if (mR == true) {
         truckY += xSpeed;
+        if (truckX == tX2 && truckY != tY2) {
+          truckY = tY2;
+        }
       }
-      if (truckX ==) {
-        
+    }
+    if (truckX >= tX2) {
+      if  (mR == true) {
+        truckY -= xSpeed;
+        if (truckX == tX2 && truckY != tY2) {
+          truckY = tY2;
+        }
+        if (truckY >= height-75) {
+          truckY = height-75;
+        }
       }
     }
   }
 }
 
+
+void endScreen() {
+  //this will make the end screen
+  if (state == 2) {
+    background(0);
+    textSize(30);
+    text("Game in very very very early BETA",width/2,height/2);
+  }
+}
 
 void keyPressed() {
   //All of they key movements
@@ -186,6 +207,9 @@ void keyPressed() {
   }
   if (key == 'a') {
     mL = true;
+  }
+  if (key == 'q') {
+    state = 2;
   }
 }
 
